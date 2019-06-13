@@ -1,0 +1,18 @@
+{
+    "name": "frootbox/filesystem",
+    "description": "Frootbox Filesystem Library",
+    "support": {
+        "docs": "",
+        "email": "jan.habbo.bruening@gmail.com"
+    },
+    "version":	"0.0.1", 
+    "authors": [
+        {
+            "name": "Jan Habbo Brüning",
+            "email": "jan.habbo.bruening@gmail.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4": { "Frootbox\\Filesystem\\": "src/" }
+    }
+}
