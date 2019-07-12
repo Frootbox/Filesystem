@@ -81,6 +81,16 @@ class Directory implements \Iterator {
         return file_exists($this->path);
     }
     
+    
+    /**
+     * 
+     */
+    public function getPath ( ) {
+        
+        return $this->path;
+    }
+    
+    
     /**
      * 
      */
