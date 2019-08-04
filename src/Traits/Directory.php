@@ -12,6 +12,10 @@ trait Directory {
      *
      */
     public function make ( ) {
+
+        if (file_exists($this->path)) {
+            return;
+        }
     
         $segments = explode('/', $this->path);
         
