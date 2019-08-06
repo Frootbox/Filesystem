@@ -28,8 +28,8 @@ trait Directory {
     
             $path .= $segment . '/';
     
-            if (!file_exists($path)) {
-                mkdir($path);
+            if (!@file_exists($path)) {
+                @mkdir($path);
             }
         }
     }
