@@ -15,10 +15,9 @@ class File {
     /**
      * 
      */
-    public function __construct ( string $path = null ) {
-        
-        if ($path !== null) {
-            
+    public function __construct ( string $path = null )
+    {                
+        if ($path !== null) {            
             $this->path = dirname($path) . '/';
             $this->name = basename($path);
         }
@@ -44,6 +43,26 @@ class File {
                 mkdir($path);
             }
         }
+    }
+    
+    
+    /**
+     * 
+     */
+    public function delete ( ): File 
+    {                   
+        // Delete physical file        
+        if (file_exists($this->path . $this->name)) {
+            
+            if (is_dir($this->path . $this->name)) {
+                d(debug_backtrace());
+                d($this);
+            }
+            
+            unlink($this->path . $this->name);
+        }
+        
+        return $this;
     }
     
     
