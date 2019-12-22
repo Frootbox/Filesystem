@@ -5,17 +5,16 @@
 
 namespace Frootbox\Filesystem;
 
-class File {
-            
+class File
+{
     protected $name;
     protected $path;
     protected $source;
     
-    
     /**
      * 
      */
-    public function __construct ( string $path = null )
+    public function __construct(string $path = null)
     {                
         if ($path !== null) {            
             $this->path = dirname($path) . '/';
@@ -23,12 +22,11 @@ class File {
         }
     }   
     
-    
     /**
      * 
      */
-    protected function makeDir ( string $directory ) {
-        
+    protected function makeDir(string $directory)
+    {
         $segments = explode('/', $directory);
         array_shift($segments);
         array_pop($segments);
@@ -39,17 +37,20 @@ class File {
             
             $path .= $segment . '/';
                         
-            if (!file_exists($path)) {               
-                mkdir($path);
+            if (!@file_exists($path)) {
+                @mkdir($path);
             }
         }
+
+        if (!file_exists($directory)) {
+            throw new \Exception('Directory couldnt be created.');
+        }
     }
-    
     
     /**
      * 
      */
-    public function delete ( ): File 
+    public function delete(): File
     {                   
         // Delete physical file        
         if (file_exists($this->path . $this->name)) {
@@ -65,23 +66,21 @@ class File {
         return $this;
     }
     
-    
     /**
      * 
      */
-    public function setSource ( $source ): File {
-        
+    public function setSource($source): File
+    {
         $this->source = $source;
         
         return $this;
     }
     
-    
     /**
      * 
      */
-    public function write ( ) {
-        
+    public function write()
+    {
         if (!file_exists($this->path)) {            
             $this->makeDir($this->path);        
         }

@@ -11,8 +11,8 @@ trait Directory {
     /**
      *
      */
-    public function make ( ) {
-
+    public function make(): void
+    {
         if (file_exists($this->path)) {
             return;
         }
@@ -21,16 +21,26 @@ trait Directory {
         
         array_shift($segments);
         array_pop($segments);
-    
-        $path = '/';
-    
-        foreach ($segments as $segment) {
-    
-            $path .= $segment . '/';
-    
-            if (!@file_exists($path)) {
-                @mkdir($path);
+
+        $todo = [];
+
+        while (count($segments)) {
+
+            $xpath = '/' . implode('/', $segments);
+
+            if (file_exists($xpath)) {
+                break;
             }
+
+            $todo[] = array_pop($segments);
+        }
+
+        $todo = array_reverse($todo);
+
+        foreach ($todo as $segment) {
+
+            $xpath .= '/' . $segment;
+            mkdir($xpath);
         }
     }
 }

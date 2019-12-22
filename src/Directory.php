@@ -5,57 +5,52 @@
 
 namespace Frootbox\Filesystem;
 
-class Directory implements \Iterator {
-    
+class Directory implements \Iterator
+{
     use \Frootbox\Filesystem\Traits\Directory;
     
     protected $path;
     protected $files = null;
     
-    
     /**
      * 
      */
-    public function __construct ( $path = null ) {
-        
+    public function __construct($path = null)
+    {
         if (!empty($path)) {
             $this->setPath($path);
         }
     }
     
-    
     /**
      * 
      */
-    public function current ( ) {
-        
+    public function current()
+    {
         return $this->files[$this->iteratorIndex];
     }
     
-    
     /**
      * 
      */
-    public function next ( ) {
-                
+    public function next()
+    {
         ++$this->iteratorIndex;
     }
     
-    
     /**
      * 
      */
-    public function key ( ) {
-        
+    public function key()
+    {
         return $this->iteratorIndex;
     }
-    
     
     /**
      *
      */
-    public function valid ( ) {
-        
+    public function valid()
+    {
         if ($this->files === null) {
             $this->loadFiles();
         }
@@ -63,62 +58,61 @@ class Directory implements \Iterator {
         return isset($this->files[$this->iteratorIndex]);
     }
     
-    
     /**
      *
      */
-    public function rewind ( ) {
-            
+    public function rewind()
+    {
         $this->iteratorIndex = 0;
     }
     
-    
     /**
      * 
      */
-    public function exists ( ) {
-        
+    public function exists()
+    {
         return file_exists($this->path);
     }
     
-    
     /**
      * 
      */
-    public function getPath ( ) {
-        
+    public function getPath()
+    {
         return $this->path;
     }
     
-    
     /**
      * 
      */
-    public function loadFiles ( ): Directory {
-        
+    public function loadFiles(): Directory
+    {
         $this->files = [ ];
-        $dir = dir($this->path);
-        
-        while (false !== ($entry = $dir->read())) {
-            
-            if ($entry{0} == '.') {
-                continue;
+
+        if (file_exists($this->path)) {
+
+            $dir = dir($this->path);
+
+            while (false !== ($entry = $dir->read())) {
+
+                if ($entry{0} == '.') {
+                    continue;
+                }
+
+                $this->files[] = $entry;
             }
-            
-            $this->files[] = $entry;
+
+            $dir->close();
         }
-        
-        $dir->close();
         
         return $this;
     }
     
-    
     /**
      * 
      */
-    public function setPath ( $path ) {
-        
+    public function setPath($path)
+    {
         if (substr($path, -1) != '/') {
             $path .= '/';
         }
