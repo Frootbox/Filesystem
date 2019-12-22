@@ -95,7 +95,7 @@ class Directory implements \Iterator
 
             while (false !== ($entry = $dir->read())) {
 
-                if ($entry{0} == '.') {
+                if ($entry[0] == '.') {
                     continue;
                 }
 
