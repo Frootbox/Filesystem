@@ -27,6 +27,12 @@ class File
      */
     protected function makeDir(string $directory)
     {
+        $oldumask = umask(0);
+        mkdir($directory,0777, true);
+        umask($oldumask);
+
+        return;
+
         $segments = explode('/', $directory);
         array_shift($segments);
         array_pop($segments);
@@ -88,5 +94,6 @@ class File
         $filepath = $this->path . $this->name;
         
         file_put_contents($filepath, $this->source);
+        chmod($filepath, 0777);
     }
 }

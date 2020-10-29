@@ -17,6 +17,13 @@ trait Directory {
             return;
         }
     
+        $oldumask = umask(0);
+        mkdir($this->path,0777, true);
+        umask($oldumask);
+
+        return;
+
+
         $segments = explode('/', $this->path);
         
         array_shift($segments);
@@ -40,6 +47,7 @@ trait Directory {
         foreach ($todo as $segment) {
 
             $xpath .= '/' . $segment;
+
             mkdir($xpath);
         }
     }
