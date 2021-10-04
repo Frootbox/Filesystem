@@ -50,6 +50,36 @@ class File
         
         return $this;
     }
+
+    /**
+     *
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     *
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     *
+     */
+    public function move($newDirectory): void
+    {
+        if (!file_exists($newDirectory)) {
+            $this->makeDir($newDirectory);
+        }
+
+        $newPath = rtrim($newDirectory, '/') . '/' . $this->getName();
+
+        rename($this->getPath() . $this->getName(), $newPath);
+    }
     
     /**
      * 
