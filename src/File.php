@@ -30,27 +30,6 @@ class File
         $oldumask = umask(0);
         mkdir($directory,0777, true);
         umask($oldumask);
-
-        return;
-
-        $segments = explode('/', $directory);
-        array_shift($segments);
-        array_pop($segments);
-        
-        $path = '/';
-        
-        foreach ($segments as $segment) {
-            
-            $path .= $segment . '/';
-                        
-            if (!@file_exists($path)) {
-                @mkdir($path);
-            }
-        }
-
-        if (!file_exists($directory)) {
-            throw new \Exception('Directory couldnt be created.');
-        }
     }
     
     /**
