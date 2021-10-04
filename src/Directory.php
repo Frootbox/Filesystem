@@ -25,7 +25,7 @@ class Directory implements \Iterator
     /**
      * 
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->files[$this->iteratorIndex];
     }
@@ -33,7 +33,7 @@ class Directory implements \Iterator
     /**
      * 
      */
-    public function next()
+    public function next(): void
     {
         ++$this->iteratorIndex;
     }
@@ -41,7 +41,7 @@ class Directory implements \Iterator
     /**
      * 
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->iteratorIndex;
     }
@@ -49,7 +49,7 @@ class Directory implements \Iterator
     /**
      *
      */
-    public function valid()
+    public function valid(): bool
     {
         if ($this->files === null) {
             $this->loadFiles();
@@ -61,7 +61,7 @@ class Directory implements \Iterator
     /**
      *
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->iteratorIndex = 0;
     }
