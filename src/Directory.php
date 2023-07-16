@@ -9,11 +9,12 @@ class Directory implements \Iterator
 {
     use \Frootbox\Filesystem\Traits\Directory;
     
-    protected $path;
-    protected $files = null;
-    
+    protected string $path;
+    protected ?array $files = null;
+    protected int $iteratorIndex = 0;
+
     /**
-     * 
+     * @param $path
      */
     public function __construct($path = null)
     {
@@ -21,33 +22,33 @@ class Directory implements \Iterator
             $this->setPath($path);
         }
     }
-    
+
     /**
-     * 
+     * @return mixed
      */
     public function current(): mixed
     {
         return $this->files[$this->iteratorIndex];
     }
-    
+
     /**
-     * 
+     * @return void
      */
     public function next(): void
     {
         ++$this->iteratorIndex;
     }
-    
+
     /**
-     * 
+     * @return int
      */
-    public function key(): mixed
+    public function key(): int
     {
         return $this->iteratorIndex;
     }
-    
+
     /**
-     *
+     * @return bool
      */
     public function valid(): bool
     {
@@ -57,33 +58,33 @@ class Directory implements \Iterator
     
         return isset($this->files[$this->iteratorIndex]);
     }
-    
+
     /**
-     *
+     * @return void
      */
     public function rewind(): void
     {
         $this->iteratorIndex = 0;
     }
-    
+
     /**
-     * 
+     * @return bool
      */
-    public function exists()
+    public function exists(): bool
     {
         return file_exists($this->path);
     }
-    
+
     /**
-     * 
+     * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
-    
+
     /**
-     * 
+     * @return $this
      */
     public function loadFiles(): Directory
     {
@@ -107,11 +108,12 @@ class Directory implements \Iterator
         
         return $this;
     }
-    
+
     /**
-     * 
+     * @param $path
+     * @return void
      */
-    public function setPath($path)
+    public function setPath($path): void
     {
         if (substr($path, -1) != '/') {
             $path .= '/';
