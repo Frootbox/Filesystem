@@ -6,14 +6,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed CHANGELOG to CHANGELOG.md
+
+### Fixed
+
+- Improved PHP 8.2 compatibility.
+
+## [0.0.7]
+
+### Added
+
+- Added moving files.
+
+### Fixed
+
+- Removed old code block.
+
+## [0.0.6]
+
+### Fixed
+
+- Improved file permissions handling.
+
+## [0.0.5]
+
+### Fixed
+
+- Fixed deprecated syntax. 
+
+## [0.0.4] - 2019-12-22
+
 ### Added
 
 - Method File::delete()
 
 ### Fixed
 
-- Traits\Directory only creates directories if not existant
-- Traits\Directory mutes warnings due to open_basedir restrictions
+- Reverse directory checking to avoid open_basedir restrictions.
+- Traits\Directory only creates directories if not existent.
+- Traits\Directory mutes warnings due to open_basedir restrictions.
 
 ## 0.0.3
 
