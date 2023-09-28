@@ -24,11 +24,11 @@ class Directory implements \Iterator
     }
 
     /**
-     * @return mixed
+     * @return File
      */
-    public function current(): mixed
+    public function current(): \Frootbox\Filesystem\File
     {
-        return $this->files[$this->iteratorIndex];
+        return new File($this->getPath() . $this->files[$this->iteratorIndex]);
     }
 
     /**

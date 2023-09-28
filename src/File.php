@@ -12,7 +12,7 @@ class File
     protected $source;
     
     /**
-     * 
+     * @param string|null $path
      */
     public function __construct(string $path = null)
     {                
@@ -20,10 +20,19 @@ class File
             $this->path = dirname($path) . '/';
             $this->name = basename($path);
         }
-    }   
-    
+    }
+
     /**
-     * 
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @param string $directory
+     * @return void
      */
     protected function makeDir(string $directory)
     {
@@ -33,7 +42,7 @@ class File
     }
     
     /**
-     * 
+     * @return $this
      */
     public function delete(): File
     {                   
@@ -52,7 +61,7 @@ class File
     }
 
     /**
-     *
+     * @return string
      */
     public function getName(): string
     {
@@ -60,7 +69,7 @@ class File
     }
 
     /**
-     *
+     * @return string
      */
     public function getPath(): string
     {
@@ -68,7 +77,9 @@ class File
     }
 
     /**
-     *
+     * @param $newDirectory
+     * @return void
+     * @throws \Exception
      */
     public function move($newDirectory): void
     {
@@ -82,7 +93,8 @@ class File
     }
     
     /**
-     * 
+     * @param $source
+     * @return $this
      */
     public function setSource($source): File
     {
@@ -92,7 +104,8 @@ class File
     }
     
     /**
-     * 
+     * @return void
+     * @throws \Exception
      */
     public function write()
     {
