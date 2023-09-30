@@ -61,6 +61,22 @@ class File
     }
 
     /**
+     * @return \Frootbox\Filesystem\Directory
+     * @throws \Exception
+     */
+    public function getDirectory(): \Frootbox\Filesystem\Directory
+    {
+        // Get filename
+        $fileName = $this->getPath() . $this->getName();
+
+        if (!is_dir($fileName)) {
+            throw new \Exception('File is not a directory.');
+        }
+
+        return new \Frootbox\Filesystem\Directory($fileName);
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -74,6 +90,16 @@ class File
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    /**
+     * Tells whether the file is a directory
+     *
+     * @return bool
+     */
+    public function isDirectory(): bool
+    {
+        return is_dir($this->path);
     }
 
     /**
