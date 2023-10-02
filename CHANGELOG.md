@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2023-10-02
+
+### Fixed
+
+- Fixed a bug in ```File::isDirectory()```.
+
 ## [0.3] - 2023-09-30
 
 ### Added

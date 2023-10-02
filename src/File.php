@@ -99,7 +99,7 @@ class File
      */
     public function isDirectory(): bool
     {
-        return is_dir($this->path);
+        return is_dir($this->path . $this->getName());
     }
 
     /**
